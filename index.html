@@ -1,1 +1,52 @@
-Hello world
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Better Task Bar!</title>
+        <link rel="stylesheet" href="./lib/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="./css/main.css" />
+        <link rel="stylesheet" href="./css/task-bar.css" />
+    </head>
+    <body>
+        <div class="container">
+            <h1>Better Task Bar</h1>
+            <h4>By <a href="http://github.com/maxluzuriaga">Max Luzuriaga</a>, for <a href="http://cs.brown.edu/courses/csci1300/">CS130</a></h4>
+
+            <p>This is a Task Bar widget for a website that runs background tasks for the user. Each task shows up with its percent-finished, and changes color based on its status after completion. After completion, each task stays on the task bar for 3 seconds before disapearing.</p>
+
+            <p>I've defined a pretty simple API that Javascript objects can adhere to in order to be added as a "task" to my task bar. When the task starts, the task bar calls its <code>.start()</code> method, and then occasionally asks the task for its status with its <code>.getStatus()</code> method, which returns either a number from 0-100 as its percent, or "done" if the task is complete without error, or "error" if the task had an error.</p>
+
+            <p>For this example, this page creates a new task every 2 seconds, with a random duration of 0-6 seconds. At the end of the duration, it randomly returns either "done" or "error". The code for these tasks is as follows:</p>
+
+<pre>
+function SimpleTask(number) {
+    this.duration = (Math.floor(Math.random() * 6) + 1) * 1000;
+    this.startTime = new Date().getTime();
+    this.name = "Task " + number;
+
+    this.start = function() {
+        // Do some task-y stuff!
+    }
+
+    this.getStatus = function() {
+        var time = new Date().getTime();
+
+        if (time > (this.startTime + this.duration)) {
+            return Math.random()<.7 ? "done" : "error";
+        } else {
+            return ((time - this.startTime) / this.duration) * 100;
+        }
+    }
+}
+</pre>
+
+            <div id="react-container">
+            </div>
+        </div>
+
+        <script src="./lib/js/react.js"></script>
+        <script src="./lib/js/react-dom.js"></script>
+        <script src="./js/task-bar.js"></script>
+        <script src="./js/demo.js"></script>
+    </body>
+</html>

@@ -1,0 +1,17 @@
+.btb-task-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    background: #eee;
+    border-top: 1px solid rgba(0,0,0,0.2);
+    padding: 30px;
+    width: 100%;
+}
+
+.btb-task-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    width: 90%;
+    margin: 0 auto;
+}
